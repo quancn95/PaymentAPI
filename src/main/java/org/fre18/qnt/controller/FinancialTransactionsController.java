@@ -37,20 +37,20 @@ public class FinancialTransactionsController {
 	@ResponseBody
 	public List<FinancialTransactions> getFinancialTransactions() {
 		// TODO Auto-generated method stub
-		List<FinancialTransactions> FinancialTransactions = financialTransactionsService.findAll();
-		return FinancialTransactions;
+		List<FinancialTransactions> financialTransactions = financialTransactionsService.findAll();
+		return financialTransactions;
 	}
 	
 	@RequestMapping(value="/financialTransaction", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public FinancialTransactions addFinancialTransactions(@RequestBody FinancialTransactions FinancialTransactions) {
+	public FinancialTransactions addFinancialTransactions(@RequestBody FinancialTransactions financialTransactions) {
 		// TODO Auto-generated method stub
-		return financialTransactionsService.create(FinancialTransactions);
+		return financialTransactionsService.create(financialTransactions);
 	}
 	
 	@RequestMapping(value="/financialTransaction/{id}", method=RequestMethod.PUT,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public FinancialTransactions updateFinancialTransactions(@PathVariable("id") int id, @RequestBody FinancialTransactions FinancialTransactions) {
+	public FinancialTransactions updateFinancialTransactions(@PathVariable("id") int id, @RequestBody FinancialTransactions financialTransactions) {
 		// TODO Auto-generated method stub
 		//FinancialTransactionsDaoImpl.updateFinancialTransactions(FinancialTransactions);
 		

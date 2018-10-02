@@ -45,7 +45,7 @@ public class CustomersController {
 		return customers;
 	}
 	
-	@RequestMapping(value="/customers", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/customer", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public Customers addCustomers(@RequestBody Customers customers) {
 		// TODO Auto-generated method stub
@@ -71,7 +71,7 @@ public class CustomersController {
 		return cus;
 	}*/
 	
-	@RequestMapping(value="/customers/{id}", method=RequestMethod.DELETE,produces={MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/customer/{id}", method=RequestMethod.DELETE,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public Customers deleteCustomers(@PathVariable("id") int id){
 		System.out.println("Delete" + id);

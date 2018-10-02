@@ -8,18 +8,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PaymentsapiApplication implements CommandLineRunner{
+public class PaymentsapiApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(PaymentsapiApplication.class, args);
 	}
 
-	@Autowired
-	private CustomersService customersService;
-	@Override
-	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		Customers cus =  customersService.getOne(1);
-		//System.out.println(cus.getCustomerId());
-	}
+//	@Autowired
+//	private CustomersService customersService;
+//	@Override
+//	public void run(String... args) throws Exception {
+//		// TODO Auto-generated method stub
+//		Customers cus =  customersService.getOne(1);
+//		//System.out.println(cus.getCustomerId());
+//	}
 }

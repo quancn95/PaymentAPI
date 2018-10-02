@@ -42,14 +42,14 @@ public class AccountsController {
 	
 	@RequestMapping(value="/account", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public Accounts addAccounts(@RequestBody Accounts Accounts) {
+	public Accounts addAccounts(@RequestBody Accounts account) {
 		// TODO Auto-generated method stub
-		return accountsService.create(Accounts);
+		return accountsService.create(account);
 	}
 	
 	@RequestMapping(value="/accounts/{id}", method=RequestMethod.PUT,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public Accounts updateAccounts(@PathVariable("id") int id, @RequestBody Accounts Accounts) {
+	public Accounts updateAccounts(@PathVariable("id") int id, @RequestBody Accounts account) {
 		// TODO Auto-generated method stub
 		//accountsDaoImpl.updateAccounts(Accounts);
 		

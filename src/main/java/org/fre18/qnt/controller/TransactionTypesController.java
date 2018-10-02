@@ -4,12 +4,81 @@
 */
 package org.fre18.qnt.controller;
 
+import java.util.List;
+
 import org.fre18.qnt.entity.TransactionTypes;
+import org.fre18.qnt.entity.TransactionTypes;
+import org.fre18.qnt.service.TransactionTypesService;
+import org.fre18.qnt.service.TransactionTypesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins ="*", maxAge = 3600)	
 @RestController
-public interface TransactionTypesController  {}
+public class TransactionTypesController  {
+	@Autowired
+	TransactionTypesService transactionTypesService;
+	
+	@RequestMapping(value="/transactionType", method=RequestMethod.GET)
+	@ResponseBody
+	public TransactionTypes getCustomer() {
+		// TODO Auto-generated method stub
+		return transactionTypesService.getOne(1);
+	}
+	
+	@RequestMapping(value="/transactionTypes", method=RequestMethod.GET)
+	@ResponseBody
+	public List<TransactionTypes> getTransactionTypes() {
+		// TODO Auto-generated method stub
+		List<TransactionTypes> TransactionTypes = transactionTypesService.findAll();
+		return TransactionTypes;
+	}
+	
+	@RequestMapping(value="/transactionType", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public TransactionTypes addTransactionTypes(@RequestBody TransactionTypes transactionType) {
+		// TODO Auto-generated method stub
+		return transactionTypesService.create(transactionType);
+	}
+	
+	@RequestMapping(value="/transactionType/{id}", method=RequestMethod.PUT,produces={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public TransactionTypes updateTransactionTypes(@PathVariable("id") int id, @RequestBody TransactionTypes transactionType) {
+		// TODO Auto-generated method stub
+		//transactionTypesDaoImpl.updateTransactionTypes(TransactionTypes);
+		
+		TransactionTypes cus = transactionTypesService.getOne(id);
+		if(cus != null) {
+			/*cus.set(TransactionTypes.getName_st());
+			cus.setAge_st(TransactionTypes.getAge_st());
+			cus.setClass_st(TransactionTypes.getClass_st());
+			cus.setAddress_st(TransactionTypes.getAddress_st());*/
+			
+			transactionTypesService.update(cus);
+		}
+		
+		return cus;
+	}
+	
+	@RequestMapping(value="/transactionType/{id}", method=RequestMethod.DELETE,produces={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public TransactionTypes deleteTransactionTypes(@PathVariable("id") int id){
+		System.out.println("Delete" + id);
+		/*TransactionTypesDaoImpl.deleteTransactionTypes(no); */
+		TransactionTypes cus = transactionTypesService.getOne(id);
+		if(cus != null) {
+			transactionTypesService.delete(id);
+		}
+		
+		return cus;
+	}
+}

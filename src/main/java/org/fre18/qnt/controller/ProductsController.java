@@ -4,12 +4,77 @@
 */
 package org.fre18.qnt.controller;
 
+import java.util.List;
+
 import org.fre18.qnt.entity.Products;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.fre18.qnt.service.ProductsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins ="*", maxAge = 3600)	
 @RestController
-public interface ProductsController  {}
+public class ProductsController  {
+	@Autowired
+	ProductsService productsService;
+	
+	@RequestMapping(value="/product", method=RequestMethod.GET)
+	@ResponseBody
+	public Products getCustomer() {
+		// TODO Auto-generated method stub
+		return productsService.getOne(1);
+	}
+	
+	@RequestMapping(value="/products", method=RequestMethod.GET)
+	@ResponseBody
+	public List<Products> getProducts() {
+		// TODO Auto-generated method stub
+		List<Products> Products = productsService.findAll();
+		return Products;
+	}
+	
+	@RequestMapping(value="/product", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public Products addProducts(@RequestBody Products products) {
+		// TODO Auto-generated method stub
+		return productsService.create(products);
+	}
+	
+	@RequestMapping(value="/product/{id}", method=RequestMethod.PUT,produces={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public Products updateProducts(@PathVariable("id") int id, @RequestBody Products product) {
+		// TODO Auto-generated method stub
+		//productDaoImpl.updateProducts(Products);
+		
+		Products cus = productsService.getOne(id);
+		if(cus != null) {
+			/*cus.set(Products.getName_st());
+			cus.setAge_st(Products.getAge_st());
+			cus.setClass_st(Products.getClass_st());
+			cus.setAddress_st(Products.getAddress_st());*/
+			
+			productsService.update(cus);
+		}
+		
+		return cus;
+	}
+	
+	@RequestMapping(value="/product/{id}", method=RequestMethod.DELETE,produces={MediaType.APPLICATION_JSON_VALUE})
+	@ResponseBody
+	public Products deleteProducts(@PathVariable("id") int id){
+		System.out.println("Delete" + id);
+		/*ProductsDaoImpl.deleteProducts(no); */
+		Products cus = productsService.getOne(id);
+		if(cus != null) {
+			productsService.delete(id);
+		}
+		
+		return cus;
+	}
+}

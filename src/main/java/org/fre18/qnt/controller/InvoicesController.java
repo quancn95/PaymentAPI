@@ -29,33 +29,33 @@ public class InvoicesController {
 	@Autowired
 	InvoicesService invoicesService;
 	
-	@RequestMapping(value="/account", method=RequestMethod.GET)
+	@RequestMapping(value="/invoice", method=RequestMethod.GET)
 	@ResponseBody
-	public Invoices getCustomer() {
+	public Invoices getInvoice() {
 		// TODO Auto-generated method stub
 		return invoicesService.getOne(1);
 	}
 	
-	@RequestMapping(value="/accounts", method=RequestMethod.GET)
+	@RequestMapping(value="/invoices", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Invoices> getAccounts() {
+	public List<Invoices> getInvoices() {
 		// TODO Auto-generated method stub
-		List<Invoices> Accounts = invoicesService.findAll();
-		return Accounts;
+		List<Invoices> invoices = invoicesService.findAll();
+		return invoices;
 	}
 	
-	@RequestMapping(value="/account", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/invoice", method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public Invoices addAccounts(@RequestBody Invoices Accounts) {
+	public Invoices addInvoice(@RequestBody Invoices invoice) {
 		// TODO Auto-generated method stub
-		return invoicesService.create(Accounts);
+		return invoicesService.create(invoice);
 	}
 	
-	@RequestMapping(value="/accounts/{id}", method=RequestMethod.PUT,produces={MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/invoice/{id}", method=RequestMethod.PUT,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public Invoices updateAccounts(@PathVariable("id") int id, @RequestBody Accounts Accounts) {
+	public Invoices updateInvoice(@PathVariable("id") int id, @RequestBody Invoices invoice) {
 		// TODO Auto-generated method stub
-		//accountsDaoImpl.updateAccounts(Accounts);
+		//invoicesDaoImpl.updateAccounts(Accounts);
 		
 		Invoices cus = invoicesService.getOne(id);
 		if(cus != null) {
@@ -70,9 +70,9 @@ public class InvoicesController {
 		return cus;
 	}
 	
-	@RequestMapping(value="/accounts/{id}", method=RequestMethod.DELETE,produces={MediaType.APPLICATION_JSON_VALUE})
+	@RequestMapping(value="/invoice/{id}", method=RequestMethod.DELETE,produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
-	public Invoices deleteAccounts(@PathVariable("id") int id){
+	public Invoices deleteInvoice(@PathVariable("id") int id){
 		System.out.println("Delete" + id);
 		/*AccountsDaoImpl.deleteAccounts(no); */
 		Invoices cus = invoicesService.getOne(id);
