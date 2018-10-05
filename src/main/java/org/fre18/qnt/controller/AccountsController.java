@@ -25,7 +25,7 @@ public class AccountsController {
 	@Autowired
 	AccountsService accountsService;
 	
-	@RequestMapping(value="/account", method=RequestMethod.GET)
+	@RequestMapping(value="/account", method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public Accounts getCustomer() {
 		// TODO Auto-generated method stub
@@ -60,7 +60,7 @@ public class AccountsController {
 			cus.setClass_st(Accounts.getClass_st());
 			cus.setAddress_st(Accounts.getAddress_st());*/
 			
-			accountsService.update(cus);
+			//accountsService.update(cus);
 		}
 		
 		return cus;
